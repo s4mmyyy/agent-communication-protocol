@@ -51,3 +51,36 @@ def create_calculator_agent():
                 return "请使用格式: 计算 5 * 3"
         except Exception as e:
             return f"计算错误: {e}"
+
+    @calculator.skill("info")
+    def get_info(query: str) -> str:
+        """获取智能体信息"""
+        return f"我是{calculator.name}, 可以进行基础数学计算。支持功能: {list(calculator.skills.keys())}"
+
+    print(f"✅ 计算器智能体创建成功，支持技能: {list(calculator.skills.keys())}")
+    return calculator
+
+# 创建智能体
+calc_agent = create_calculator_agent()
+if calc_agent:
+    # 测试技能
+    print("\n🧪 测试智能体技能:")
+    test_queries = [
+        "获取信息",
+        "计算 10 + 5",
+        "计算 6 * 7"
+    ]
+
+    for query in test_queries:
+        if "信息" in query:
+            result = calc_agent.skills["info"](query)
+        elif "+" in query:
+            result = calc_agent.skills["add"](query)
+        elif "*" in query or "x" in query:
+            result = calc_agent.skills["multiply"](query)
+        else:
+            result = "位置查询类型"
+
+        print(f"  📝 查询: {query}")
+        print(f"  🤖 回复: {result}")
+        print()
