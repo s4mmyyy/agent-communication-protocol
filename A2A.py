@@ -15,7 +15,7 @@ def create_calculator_agent():
         version="1.0.0",
         capabilities={
             "math":["addition","subtraction","multiplication", "division"],
-            "advanced":["power"."sqrt","factorial"]
+            "advanced":["power","sqrt","factorial"]
         }
     )
 
